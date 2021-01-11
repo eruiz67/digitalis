@@ -3,11 +3,17 @@
     'name': "project_digitalis",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Estiende el modulo de proyecto para manejar clientes y sus estados""",
 
     'description': """
-        Long description of module's purpose
+       Test de Odoo para la versión 14/13
+
+        Desarrolle un módulo que agregue un nuevo tab en la aplicación de Proyecto que permita:
+        - Agregar clientes
+        - De cada cliente se desea tener el estado del mismo
+        - Los estados posibles tienen que poder ser gestionados desde la aplicación de Proyecto
+        - La edición de los estados de los clientes en el proyecto solo la puede hacer un usuario con permisos de administración
+        - Los posibles estados de un cliente en un proyecto son propios de cada compañía 
     """,
 
     'author': "Ernesto Ruiz",
@@ -17,7 +23,7 @@
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Uncategorized',
-    'version': '0.1',
+    'version': '14.0.0.1',
 
     # any module necessary for this one to work correctly
     'depends': ['base','project'],
