@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_project_digitalis_state,access_user_project_digitalis_state,model_project_digitalis_state,project.group_project_user,1,0,0,0
+access_root_project_digitalis_state,access_root_project_digitalis_state,model_project_digitalis_state,project.group_project_manager,1,1,1,1

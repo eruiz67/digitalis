@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="state_view_form" model="ir.ui.view">
+    <field name="name">project.state.view.form</field>
+    <field name="model">project_digitalis.state</field>
+    <field name="arch" type="xml">
+        <tree editable="bottom">
+        <field name="name" />
+        <field name="description" />
+        </tree>
+    </field>
+</record>
+
+    <record model="ir.ui.view" id="view_partner_form_inherit_state">
+        <field name="name">res.partner.project.state</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="state" widget="selection"/>
+            </field>
+
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_partner_search_inherit_state_search">
+        <field name="name">res.partner.state.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="state"/>
+            </field>
+
+        </field>
+    </record>
+
+
+</odoo>

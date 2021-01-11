@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="partner_project_action" model="ir.actions.act_window">
+        <field name="name">Clientes</field>
+        <field name="res_model">res.partner</field>
+        <!--field name="view_type">form</field-->
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No hay Clientes</p>
+        </field>
+    </record>
+
+    <record id="partner_project_state_action" model="ir.actions.act_window">
+        <field name="name">Estados de clientes</field>
+        <field name="res_model">project_digitalis.state</field>
+        <!--field name="view_type">form</field-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No se han definido estados para los clientes</p>
+        </field>
+    </record>
+
+</odoo>

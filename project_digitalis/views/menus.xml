@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <menuitem
+    id="menu_project_partners"
+    name="Clientes"
+    action="partner_project_action"
+    parent="project.menu_main_pm"
+    sequence="90"/>
+
+    <menuitem
+    id="menu_project_partners_state"
+    name="Estados de clientes"
+    action="partner_project_state_action"
+    groups="project.group_project_manager"
+    parent="project.menu_project_config"
+    sequence="0"/>
+</odoo>
