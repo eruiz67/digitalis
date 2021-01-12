@@ -8,23 +8,114 @@
         <tree editable="bottom">
         <field name="name" />
         <field name="description" />
+        <field name="partner_id" />
         </tree>
     </field>
 </record>
 
-    <record model="ir.ui.view" id="view_partner_form_inherit_state">
-        <field name="name">res.partner.project.state</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
+<record id="partner_state_view_form" model="ir.ui.view">
+    <field name="name">partner.state.view.form</field>
+    <field name="model">project_digitalis.partner_state</field>
+    <field name="arch" type="xml">
+        <form string="Adicionar cliente">
+            <sheet>
+                <group>
+                    <field name="partner_id" />
+                    <field name="state_id" />
+                    <field name="project_id" invisible="1"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <record model="ir.ui.view" id="view_project_form_inherit_state">
+        <field name="name">project.partner.state.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
         <field name="arch" type="xml">
-            <field name="category_id" position="after">
-                <field name="state" widget="selection"/>
-            </field>
+                <page name="description_page" position="after">
+                    <page name="clientes" string="Clientes" attrs="{'invisible': [('id','=',False)]}">
+                        <field name="partner_state_ids" class="pt-2" context="{'default_project_id': id ,'from_o2m':True }">
+                            <tree editable="bottom">
+                                <field name="partner_id"/>
+                                <field name="state_id" options="{'no_create_edit':1, 'no_open': 1, 'no_create':1}"/>
+                            </tree>
+                        </field>
+                    </page>
+            </page>
 
         </field>
     </record>
 
-        <record model="ir.ui.view" id="view_partner_search_inherit_state_search">
+<record id="res_project_partner_kanban_inherit" model="ir.ui.view">
+    <field name="name">project.partner.kanban.view</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="project.view_project_kanban" />
+    <field name="arch" type="xml">
+
+    <field name="task_count" position="before"> 
+      <field name="partner_count"/>
+      <field name="label_partner_count" />
+    </field>
+    <xpath expr="//t[@t-name='kanban-box']//a[@name='action_view_tasks']" position="after">
+        <a class="o_project_kanban_box" name="action_view_partners" type="object">
+            <div>
+              <span class="o_value"><t t-esc="record.partner_count.value"/></span>
+              <span class="o_label"><t t-esc="record.label_partner_count.value"/></span>
+            </div>
+        </a>
+    
+    </xpath>
+
+
+    </field>
+</record>
+
+
+        <record id="act_project_partner_tree_view" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">project_digitalis.partner_state</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('project_id', '=', active_id)]</field>
+            <field name="context">{
+                  'default_project_id': active_id,
+            }</field>
+            <!--field name="search_view_id" ref="view_task_search_form"/-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    El proyecto no tiene clientes asociados!
+                </p><p>
+                    Para hacer un seguimiento de los clientes para cada proyecto puede adicionarlos aqui.<br/>
+                    El estado del cliente debe ser uno de los estados definidos para su compañia.
+                </p>
+            </field>
+        </record>
+
+        <record id="partner_state_project_view_tree" model="ir.ui.view">
+            <field name="name">project.partner.state.view.form</field>
+            <field name="model">project_digitalis.partner_state</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="partner_id" />
+                    <field name="state_id" options="{'no_create_edit':1, 'no_open': 1, 'no_create':1}"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="partner_state_project_view_search" model="ir.ui.view">
+            <field name="name">project.partner.state.view.search</field>
+            <field name="model">project_digitalis.partner_state</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="partner_id" />
+                    <field name="state_id" />
+
+                </search>
+            </field>
+        </record>
+        <!--record model="ir.ui.view" id="view_partner_search_inherit_state_search">
         <field name="name">res.partner.state.search</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
@@ -34,7 +125,7 @@
             </field>
 
         </field>
-    </record>
+    </record-->
 
 
 </odoo>
